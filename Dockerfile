@@ -33,7 +33,7 @@ RUN python model.py
 WORKDIR /src/app
 
 # set app port
-EXPOSE 8080
+EXPOSE 5001
 
 ENTRYPOINT [ "python" ] 
 CMD [ "app.py" ] 
