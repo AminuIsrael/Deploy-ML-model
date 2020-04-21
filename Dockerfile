@@ -1,8 +1,11 @@
+#I specify the parent base image which is the python version 3.7
 FROM python:3.7
 
 MAINTAINER aminu israel <aminuisrael2@gmail.com>
 
+# This prevents Python from writing out pyc files
 ENV PYTHONDONTWRITEBYTECODE 1
+# This keeps Python from buffering stdin/stdout
 ENV PYTHONUNBUFFERED 1
 
 # install system dependencies
@@ -33,7 +36,9 @@ RUN python model.py
 WORKDIR /src/app
 
 # set app port
-EXPOSE 5001
+EXPOSE 8080
 
 ENTRYPOINT [ "python" ] 
-CMD [ "app.py" ] 
+
+# Run app.py when the container launches
+CMD [ "app.py","run","--host","0.0.0.0"] 

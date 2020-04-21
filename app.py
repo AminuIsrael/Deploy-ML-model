@@ -45,7 +45,7 @@ def model_deploy():
                 "error" : '0',
                 "message" : 'Successfull',
                 "prediction": prediction,
-                "confidence_score" : conf_score
+                "confidence_score" : conf_score.round(2)
             }
         else:
             return_data = {
@@ -61,6 +61,6 @@ def model_deploy():
 
 
 if __name__ == "__main__":
-    flask_app.run(port=5001, debug=False)
+    flask_app.run(host ='0.0.0.0',port=8080, debug=False)
     
     
