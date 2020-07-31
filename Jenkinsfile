@@ -9,7 +9,9 @@ pipeline {
         stage('Build Docker Image') {
             agent any
             steps {
-                sh 'docker build -t aminu_israel/ml_model:1.0 .'
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
             }
         }
         stage('Test Image') {
@@ -25,6 +27,11 @@ pipeline {
                         dockerImage.push()
                     }
                 }
+            }
+        }
+        stage('Remove Unused docker image') {
+            steps {
+                sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
