@@ -16,7 +16,7 @@ pipeline {
             agent any
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub',passwordVariable:'Am1nuIsr2@',usernameVariable: 'israelaminu')) {
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh 'docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}'
                     sh 'docker push israelaminu/ML_model:1.0'
                 }
             }
