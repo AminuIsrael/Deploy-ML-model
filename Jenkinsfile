@@ -1,5 +1,10 @@
 pipeline {
-    agent none
+    environment {
+        registry = 'israelaminu/ml_model'
+        registryCredential = 'dockerhub_id'
+        dockerImage = ''
+    }
+    agent any
     stages {
         stage('Build Docker Image') {
             agent any
@@ -15,7 +20,11 @@ pipeline {
         stage('Push Docker Image to Registry') {
             agent any
             steps {
-                sh 'docker run --name deploymodel -p 9091:8080 aminu_israel/ml_model:1.0'
+                script {
+                    docker.withRegistry('',registryCredential) {
+                        dockerImage.push()
+                    }
+                }
             }
         }
     }
