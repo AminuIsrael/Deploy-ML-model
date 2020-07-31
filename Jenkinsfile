@@ -15,7 +15,7 @@ pipeline {
         stage('Run Docker Image') {
             agent any
             steps {
-                sh 'docker run --name deployML -p 9091:8080 aminu_israel/ml_model:1.0'
+                sh 'docker run --name deploymodel -p 9091:8080 aminu_israel/ml_model:1.0'
             }
         }
     }
