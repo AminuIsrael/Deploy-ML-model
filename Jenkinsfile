@@ -15,10 +15,7 @@ pipeline {
         stage('Push Docker Image to Registry') {
             agent any
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerHub',passwordVariable:'Am1nuIsr2@',usernameVariable: 'israelaminu')) {
-                    sh 'docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}'
-                    sh 'docker push israelaminu/ML_model:1.0'
-                }
+                sh 'docker run --name deploymodel -p 9091:8080 aminu_israel/ml_model:1.0'
             }
         }
     }
